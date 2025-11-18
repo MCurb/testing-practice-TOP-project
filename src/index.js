@@ -46,30 +46,38 @@ export function caesarCipher(string, shift) {
 
   let ciphered = [];
 
-  string.split('').forEach((letter) => {
+  for (const letter of string.split('')) {
     let lowerCaseLetter = letter.toLowerCase();
-    if (alphabet.includes(lowerCaseLetter)) {
-      for (let i = 0; i < alphabet.length; i++) {
-        if (alphabet[i] === lowerCaseLetter) {
-          let finalLetter;
-          if (alphabet.length - 1 < i + shift) {
-            finalLetter = alphabet[offFactor(alphabet, i + shift)];
-          } else {
-            finalLetter = alphabet[i + shift];
-          }
-          isUpperCase(letter)
-            ? ciphered.push(finalLetter.toUpperCase())
-            : ciphered.push(finalLetter.toLowerCase());
-        }
-      }
-    } else {
+
+    //If it's a non-alphabetical character push it without change
+    if (!alphabet.includes(lowerCaseLetter)) {
       ciphered.push(letter);
+      continue;
     }
-  });
+
+    for (let i = 0; i < alphabet.length; i++) {
+      if (alphabet[i] === lowerCaseLetter) {
+        let finalLetter;
+
+        //if it's out of alphabet bounds
+        if (alphabet.length - 1 < i + shift) {
+          finalLetter = alphabet[offFactor(alphabet, i + shift)];
+        } else {
+          finalLetter = alphabet[i + shift];
+        }
+
+        //Preserve character case
+        isUpperCase(letter)
+          ? ciphered.push(finalLetter.toUpperCase())
+          : ciphered.push(finalLetter.toLowerCase());
+      }
+    }
+  }
 
   return ciphered.join('');
 }
 
+//Calculate the index of the beginning of the alphabet
 function offFactor(array, number) {
   let factor = number - array.length;
   return factor;
