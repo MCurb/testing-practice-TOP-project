@@ -27,21 +27,21 @@ test('reverse long string', () => {
 //Calculator:
 
 test('test each calculator operation', () => {
-  const num1 = 2;
-  const num2 = 3;
+  const num1 = 25;
+  const num2 = 321;
   for (const operation in calculator) {
     switch (operation) {
       case 'add':
-        expect(calculator[operation](num1, num2)).toBe(5);
+        expect(calculator[operation](num1, num2)).toBe(num1 + num2);
         break;
       case 'subtract':
-        expect(calculator[operation](num1, num2)).toBe(-1);
+        expect(calculator[operation](num1, num2)).toBe(num1 - num2);
         break;
       case 'multiply':
-        expect(calculator[operation](num1, num2)).toBe(6);
+        expect(calculator[operation](num1, num2)).toBe(num1 * num2);
         break;
       case 'divide':
-        expect(calculator[operation](num1, num2)).toBeCloseTo(0.666);
+        expect(calculator[operation](num1, num2)).toBe(num1 / num2);
         break;
       default:
         break;
