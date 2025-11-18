@@ -1,9 +1,13 @@
 import { capitalize } from './index';
 
-test('capitalize fn', () => {
+test('capitalize word', () => {
   expect(capitalize('word')).toBe('Word');
 });
 
-test('capitalize fn perro', () => {
-  expect(capitalize('perro')).toBe('Perro');
+test('capitalize house', () => {
+  expect(capitalize('house')).toBe('House');
+});
+
+test('capitalize long sentence', () => {
+  expect(capitalize('this is a long string')).toBe('This is a long string');
 });
