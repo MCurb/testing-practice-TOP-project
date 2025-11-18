@@ -1,4 +1,4 @@
-import { capitalize, reverseString, calculator } from './index';
+import { capitalize, reverseString, calculator, caesarCipher } from './index';
 
 //Capitalize:
 
