@@ -1,4 +1,4 @@
-const { capitalize } = require('./index.js');
+import { capitalize } from './index';
 
 test('capitalize fn', () => {
   expect(capitalize('word')).toBe('Word');
