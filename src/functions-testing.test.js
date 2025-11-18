@@ -48,3 +48,21 @@ test('test each calculator operation', () => {
     }
   }
 });
+
+//Caesar Cipher
+
+test('test ciphering works', () => {
+  expect(caesarCipher('hello', 3)).toBe('khoor');
+});
+
+test('test wrapping', () => {
+  expect(caesarCipher('xyz', 3)).toBe('abc');
+});
+
+test('test case perseveration', () => {
+  expect(caesarCipher('HeLLo', 3)).toBe('KhOOr');
+});
+
+test('test punctuation', () => {
+  expect(caesarCipher('Hello, World!', 3)).toBe('Khoor, Zruog!');
+});
