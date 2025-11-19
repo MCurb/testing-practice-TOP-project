@@ -10,6 +10,7 @@ export function capitalize(string) {
 
 //Reverse String
 export function reverseString(string) {
+  if (!string) return '';
   return Array.from(string).reverse().join('');
 }
 
