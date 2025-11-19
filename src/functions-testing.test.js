@@ -8,68 +8,51 @@ import {
 
 //Capitalize:
 
-test('capitalize word', () => {
-  expect(capitalize('word')).toBe('Word');
-});
+describe('Capitalize Tests', () => {
+  describe.each([
+    ['computer', 'Computer'],
+    ['house', 'House'],
+    ['long string', 'Long string'],
+  ])('capitalize different strings', (string, expected) => {
+    test(`capitalize ${string}`, () => {
+      expect(capitalize(string)).toBe(expected);
+    });
+  });
 
-test('capitalize house', () => {
-  expect(capitalize('house')).toBe('House');
-});
+  test('does not capitalize empty string', () => {
+    expect(capitalize('')).toBe('');
+  });
 
-test('capitalize long sentence', () => {
-  expect(capitalize('this is a long string')).toBe('This is a long string');
-});
-
-test('does not capitalize empty string', () => {
-  expect(capitalize('')).toBe('');
-});
-
-test('throws on non-string', () => {
-  expect(() => capitalize(123)).toThrow(TypeError);
+  test('throws on non-string', () => {
+    expect(() => capitalize(123)).toThrow(TypeError);
+  });
 });
 
 //Reverse String:
 
-test('reverse string', () => {
-  expect(reverseString('Marcos')).toBe('socraM');
-});
-
-test('handles long string', () => {
-  expect(reverseString('this is a long string')).toBe('gnirts gnol a si siht');
-});
-
-test('handles empty', () => {
-  expect(reverseString('')).toBe('');
-});
-
-test('reverses strings with emoji and surrogate pairs', () => {
-  // This is an advanced edge case — proper reversal must keep emoji intact
-  expect(reverseString('a💖b')).toBe('b💖a');
+describe.each([
+  ['Marcos', 'socraM', 'string'],
+  ['this is a long string', 'gnirts gnol a si siht', 'long string'],
+  ['', '', 'empty string'],
+  ['a💖b', 'b💖a', 'string with emojies and surrogate pairs'],
+])('Reverse String Tests', (string, expected, stringType) => {
+  test(`reverse ${stringType}`, () => {
+    expect(reverseString(string)).toBe(expected);
+  });
 });
 
 //Calculator:
-
-test('test each calculator operation', () => {
-  const num1 = 25;
-  const num2 = 321;
-  for (const operation in calculator) {
-    switch (operation) {
-      case 'add':
-        expect(calculator[operation](num1, num2)).toBe(num1 + num2);
-        break;
-      case 'subtract':
-        expect(calculator[operation](num1, num2)).toBe(num1 - num2);
-        break;
-      case 'multiply':
-        expect(calculator[operation](num1, num2)).toBe(num1 * num2);
-        break;
-      case 'divide':
-        expect(calculator[operation](num1, num2)).toBe(num1 / num2);
-        break;
-      default:
-        break;
-    }
-  }
+const num1 = 25;
+const num2 = 321;
+describe.each([
+  [num1, num2, 'add', num1 + num2],
+  [num1, num2, 'subtract', num1 - num2],
+  [num1, num2, 'multiply', num1 * num2],
+  [num1, num2, 'divide', num1 / num2],
+])('Calculator Tests', (num1, num2, operation, expected) => {
+  test(operation, () => {
+    expect(calculator[operation](num1, num2)).toBe(expected);
+  });
 });
 
 //Analyze Array
@@ -85,18 +68,13 @@ test('test object analysis', () => {
 
 //Caesar Cipher
 
-test('test ciphering works', () => {
-  expect(caesarCipher('hello', 3)).toBe('khoor');
-});
-
-test('test wrapping', () => {
-  expect(caesarCipher('xyz', 3)).toBe('abc');
-});
-
-test('test case perseveration', () => {
-  expect(caesarCipher('HeLLo', 3)).toBe('KhOOr');
-});
-
-test('test punctuation', () => {
-  expect(caesarCipher('Hello, World!', 3)).toBe('Khoor, Zruog!');
+describe.each([
+  ['hello', 3, 'khoor', 'cipher word'],
+  ['xyz', 3, 'abc', 'wrapping'],
+  ['HeLLo', 3, 'KhOOr', 'case perseveration'],
+  ['Hello, World!', 3, 'Khoor, Zruog!', 'puntuation'],
+])('Caesar Cipher Tests', (string, shift, expected, description) => {
+  test(description, () => {
+    expect(caesarCipher(string, shift)).toBe(expected);
+  });
 });
