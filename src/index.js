@@ -16,10 +16,13 @@ export function reverseString(string) {
 
 //Calculator
 export const calculator = {
-  add: (num1, num2) => num1 + num2,
-  subtract: (num1, num2) => num1 - num2,
-  multiply: (num1, num2) => num1 * num2,
-  divide: (num1, num2) => num1 / num2,
+  add: (a, b) => a + b,
+  subtract: (a, b) => a - b,
+  multiply: (a, b) => a * b,
+  divide: (a, b) => {
+    if (b === 0) throw new Error('Division by zero is not allowed.');
+    return a / b;
+  },
 };
 
 //Analyze Array
