@@ -73,6 +73,8 @@ describe.each([
   ['xyz', 3, 'abc', 'wrapping'],
   ['HeLLo', 3, 'KhOOr', 'case perseveration'],
   ['Hello, World!', 3, 'Khoor, Zruog!', 'puntuation'],
+  ['Marcos', 34, 'Aofqcg', 'long shift'],
+  ['Marcos', -5, 'Hvmxjn', 'negative shift'],
 ])('Caesar Cipher Tests', (string, shift, expected, description) => {
   test(description, () => {
     expect(caesarCipher(string, shift)).toBe(expected);
