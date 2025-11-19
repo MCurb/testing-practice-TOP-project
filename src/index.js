@@ -86,3 +86,12 @@ function offFactor(array, number) {
 function isUpperCase(character) {
   return character === character.toUpperCase() ? true : false;
 }
+
+export function analyzeArray(array) {
+  const obj = {};
+  obj.min = Math.min(...array);
+  obj.max = Math.max(...array);
+  obj.average = array.reduce((acc, curr) => acc + curr) / array.length;
+  obj.length = array.length;
+  return obj;
+}
