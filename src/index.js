@@ -32,80 +32,34 @@ export function analyzeArray(array) {
   return obj;
 }
 
-//Caesar Cipher
-export function caesarCipher(string, shift) {
-  const alphabet = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    'k',
-    'l',
-    'm',
-    'n',
-    'o',
-    'p',
-    'q',
-    'r',
-    's',
-    't',
-    'u',
-    'v',
-    'w',
-    'x',
-    'y',
-    'z',
-  ];
+// Caesar Cipher
 
-  let ciphered = [];
+export function caesarCipher(str, shift) {
+  //Save the codes of uppercase A and Z, and lowercase a and z
+  //I need them to find out if a character is upper or lower case
 
-  for (const letter of string.split('')) {
-    let lowerCaseLetter = letter.toLowerCase();
+  const aCode = 'a'.charCodeAt(0);
+  const ACode = 'A'.charCodeAt(0);
+  const zCode = 'z'.charCodeAt(0);
+  const ZCode = 'Z'.charCodeAt(0);
 
-    //If it's a non-alphabetical character push it without change
-    if (!alphabet.includes(lowerCaseLetter)) {
-      ciphered.push(letter);
-      continue;
-    }
+  const mod = (n, m) => ((n % m) + m) % m;
+  let ciphered = '';
 
-    for (let i = 0; i < alphabet.length; i++) {
-      if (alphabet[i] === lowerCaseLetter) {
-        let finalLetter;
-
-        //if it's out of alphabet bounds
-        if (alphabet.length - 1 < i + shift) {
-          finalLetter = alphabet[offFactor(alphabet, i + shift)];
-        } else {
-          finalLetter = alphabet[i + shift];
-        }
-
-        //Preserve character case
-        isUpperCase(letter)
-          ? ciphered.push(finalLetter.toUpperCase())
-          : ciphered.push(finalLetter.toLowerCase());
-      }
+  //loop over each character of str
+  for (const char of str) {
+    //generate the ASCII code of the current character
+    const charCode = char.charCodeAt(0);
+    //if the code number is between the code of A and Z, then it's uppercase
+    if (charCode >= ACode && charCode <= ZCode) {
+      const shifted = ACode + mod(charCode - ACode + shift, 26);
+      ciphered += String.fromCharCode(shifted);
+    } else if (charCode >= aCode && charCode <= zCode) {
+      const shifted = aCode + mod(charCode - aCode + shift, 26);
+      ciphered += String.fromCharCode(shifted);
+    } else {
+      ciphered += char;
     }
   }
-
-  return ciphered.join('');
-}
-
-// ========================
-// PRIVATE HELPERS
-// ========================
-
-//Calculate the index of the beginning of the alphabet
-function offFactor(array, number) {
-  let factor = number - array.length;
-  return factor;
-}
-
-function isUpperCase(character) {
-  return character === character.toUpperCase() ? true : false;
+  return ciphered;
 }
