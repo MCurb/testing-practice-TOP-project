@@ -20,14 +20,31 @@ test('capitalize long sentence', () => {
   expect(capitalize('this is a long string')).toBe('This is a long string');
 });
 
+test('does not capitalize empty string', () => {
+  expect(capitalize('')).toBe('');
+});
+
+test('throws on non-string', () => {
+  expect(() => capitalize(123)).toThrow(TypeError);
+});
+
 //Reverse String:
 
-test('reverse string 1', () => {
+test('reverse string', () => {
   expect(reverseString('Marcos')).toBe('socraM');
 });
 
-test('reverse long string', () => {
+test('handles long string', () => {
   expect(reverseString('this is a long string')).toBe('gnirts gnol a si siht');
+});
+
+test('handles empty', () => {
+  expect(reverseString('')).toBe('');
+});
+
+test('reverses strings with emoji and surrogate pairs', () => {
+  // This is an advanced edge case — proper reversal must keep emoji intact
+  expect(reverseString('a💖b')).toBe('b💖a');
 });
 
 //Calculator:
