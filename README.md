@@ -34,6 +34,8 @@ This project helped me deepen my understanding of:
 ### ✔️ `caesarCipher(string, shift)`
 
 - Tested basic shifting
+- Tested large shifts
+- Tested negative shifts
 - Tested wrapping around alphabet boundaries (`xyz → abc`)
 - Ensured case preservation
 - Ensured punctuation stays the same
