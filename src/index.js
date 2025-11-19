@@ -1,12 +1,19 @@
+// ========================
+// PUBLIC API (exports)
+// ========================
+
+//Capitalize
 export function capitalize(string) {
   const firstLetter = string.slice(0, 1).toUpperCase();
   return firstLetter.concat('', string.slice(1));
 }
 
+//Reverse String
 export function reverseString(string) {
   return string.split('').reverse().join('');
 }
 
+//Calculator
 export const calculator = {
   add: (num1, num2) => num1 + num2,
   subtract: (num1, num2) => num1 - num2,
@@ -14,6 +21,17 @@ export const calculator = {
   divide: (num1, num2) => num1 / num2,
 };
 
+//Analyze Array
+export function analyzeArray(array) {
+  const obj = {};
+  obj.min = Math.min(...array);
+  obj.max = Math.max(...array);
+  obj.average = array.reduce((acc, curr) => acc + curr) / array.length;
+  obj.length = array.length;
+  return obj;
+}
+
+//Caesar Cipher
 export function caesarCipher(string, shift) {
   const alphabet = [
     'a',
@@ -77,6 +95,10 @@ export function caesarCipher(string, shift) {
   return ciphered.join('');
 }
 
+// ========================
+// PRIVATE HELPERS
+// ========================
+
 //Calculate the index of the beginning of the alphabet
 function offFactor(array, number) {
   let factor = number - array.length;
@@ -85,13 +107,4 @@ function offFactor(array, number) {
 
 function isUpperCase(character) {
   return character === character.toUpperCase() ? true : false;
-}
-
-export function analyzeArray(array) {
-  const obj = {};
-  obj.min = Math.min(...array);
-  obj.max = Math.max(...array);
-  obj.average = array.reduce((acc, curr) => acc + curr) / array.length;
-  obj.length = array.length;
-  return obj;
 }
